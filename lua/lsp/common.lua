@@ -4,8 +4,8 @@ local common = {}
 
 local utils = require('utils')
 
-function common.custom_attach(client)
-  print("S Built-in LSP started")
+function common.custom_attach()
+  utils.debug("S Built-in LSP started")
 
   -- GoTo
   utils.bufmap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
@@ -20,9 +20,12 @@ function common.custom_attach(client)
 
   -- Action
   utils.bufmap("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-  utils.bufmap("n", "<Leader>ld", "<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>")
+  utils.bufmap("n", "<Leader>ld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
+  utils.bufmap("n", "<Leader>[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
+  utils.bufmap("n", "<Leader>]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
   utils.bufmap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
   utils.bufmap("n", "<Leader>cf", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+  utils.bufmap("v", "<Leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
   utils.bufmap("n", "<Leader>ic", "<cmd>lua vim.lsp.buf.incoming_calls()<CR>")
   utils.bufmap("n", "<Leader>oc", "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>")
 end
@@ -36,6 +39,14 @@ function common.lsputils()
   vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
   vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
   vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      underline = true,
+      virtual_text = true,
+      signs = true,
+      update_in_insert = true,
+    }
+  )
 end
 
 return common

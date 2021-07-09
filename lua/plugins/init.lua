@@ -1,5 +1,8 @@
 -- Plugins configuration
-print('S Plugins configuration sequence started')
+
+local utils = require 'utils'
+
+utils.debug('S Plugins configuration sequence started')
 
 -- Load package manager.
 vim.cmd 'packadd paq-nvim'
@@ -76,4 +79,4 @@ for _, config in pairs(custom_configs) do
   require('plugins.' .. config)
 end
 
-print('S Plugins configuration sequence finished')
+utils.debug('S Plugins configuration sequence finished')

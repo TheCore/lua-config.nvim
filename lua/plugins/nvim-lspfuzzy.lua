@@ -1,6 +1,11 @@
 -- NeoVim Language Server Fuzzy Finder configuration.
-print('S LSP Fuzzy configuration sequence started')
+
+local utils = require 'utils'
+
+utils.debug('S LSP Fuzzy configuration sequence started')
 
 require('lspfuzzy').setup {}
 
-print('S LSP Fuzzy configuration sequence finished')
+utils.map('n', '<Leader>ha', ':LspDiagnosticsAll<CR>')
+
+utils.debug('S LSP Fuzzy configuration sequence finished')

@@ -1,7 +1,8 @@
 -- UtilSnips configuration.
-print('S UltiSnips configuration sequence started')
 
 local utils = require('utils')
+
+utils.debug('S UltiSnips configuration sequence started')
 
 -- Change snippet's expanding trigger.
 vim.g.UltiSnipsExpandTrigger = '<C-e>'
@@ -19,4 +20,4 @@ vim.g.ultisnips_python_style = 'google'
 -- Open snippets editor with shortcut.
 utils.map('n', '<Leader>se', ':UltiSnipsEdit<CR>')
 
-print('S UltiSnips configuration sequence finished')
+utils.debug('S UltiSnips configuration sequence finished')

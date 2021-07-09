@@ -1,7 +1,8 @@
 -- Custom key mappings.
-print('S Custom key mappings configuration sequence started')
 
 local utils = require('utils')
+
+utils.debug('S Custom key mappings configuration sequence started')
 
 -- Remap Escape to convenier key combination.
 utils.map('i', ';l', '<Esc>l')
@@ -27,6 +28,10 @@ utils.map('i', '<Leader>;', '<C-o>m`<C-o>A;<C-o>``')
 -- Configure insertion of dot/comma after the closing bracket.
 utils.map('i', '<Leader>.', '<C-\\><C-o>a.')
 utils.map('i', '<Leader>,', '<C-\\><C-o>a,')
+
+-- Configure insertion of yanked text at the beginning/end of the line.
+utils.map('n', '<Leader>as', 'm`^P``')
+utils.map('n', '<Leader>ae', 'm`$p``')
 
 -- #############################################################################
 -- Tabs/buffers
@@ -57,4 +62,4 @@ local sessions_dir = '~/.local/share/nvim/site/sessions'
 utils.map('n', '<Leader>ss', ':mks! ' .. sessions_dir .. '/*.vim<C-D><BS><BS><BS><BS><BS>')
 utils.map('n', '<Leader>sr', ':so ' .. sessions_dir .. '/*.vim<C-D><BS><BS><BS><BS><BS>')
 
-print('S Custom key mappings configuration sequence finished')
+utils.debug('S Custom key mappings configuration sequence finished')

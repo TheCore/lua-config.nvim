@@ -1,0 +1,40 @@
+# snippet: argparse
+# Create argument parser function.
+snippet cliargs "Create CLI args parser" wm
+class CliArgs:
+    """Command Line Interface arguments' parser.
+
+    Attributes:
+        description (str): Description of the script.
+        args (Namespace): Parsed CLI arguments.
+    """
+    description = """${1:script_description}"""
+
+    def __init__(self):
+        self._parser = ArgumentParser(description=self.description)
+        self._prepare_args()
+        self._parse()
+
+    def _parse(self):
+        self.args = self._parser.parse_args()
+
+    def _prepare_args(self):
+        self._parser.add_argument('${2:arg}')
+
+endsnippet
+
+
+# snippet: class-no-docs
+# Create class without docstrings.
+snippet clsnd "Create class without docstring" wm
+class ${1:name}:
+    def __init__(self):
+        ${2:pass}
+endsnippet
+
+# snippet: fn-no-docs
+# Create simple function without docstrings.
+snippet defnd "Create function without docstring" wm
+def ${1:funcname}(${2:args})${3: -> None}:
+    ${4:pass}
+endsnippet

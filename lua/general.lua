@@ -1,7 +1,11 @@
 -- General configuration
-print('S General configuration sequence started')
 
 local utils = require('utils')
+
+-- Toggle debugging of configuration.
+vim.g.debug = false
+
+utils.debug('S General configuration sequence started')
 
 -- Choose colorscheme.
 local colors = 'OceanicNext'
@@ -22,7 +26,7 @@ utils.opt('w', 'nu', true)
 utils.opt('w', 'rnu', true)
 
 -- Set column marker at 80 column.
-vim.g.colorcolumn = '80,120'
+vim.cmd('set colorcolumn=80,100,120')
 
 -- Enable mouse to interact with editor.
 utils.opt('o', 'mouse', 'a')
@@ -36,6 +40,20 @@ utils.opt('o', 'splitright', true)
 
 -- Configure tab behavior.
 utils.opt('o', 'switchbuf', 'usetab,newtab')
+
+-- Put yanked text in system clipboard.
+vim.g.clipboard = {
+  name = 'CopyQ',
+  copy = {
+    ['+'] = { 'copyq', 'add', '-' },
+    ['*'] = { 'copyq', 'add', '-' }
+  },
+  paste = {
+    ['+'] = { 'copyq', 'paste', '-' },
+    ['*'] = { 'copyq', 'paste', '-' }
+  },
+  cache_enabled = 1
+}
 
 -- Set indentation and tabs 2 spaces wide by default for all files and replace
 -- tabs with spaces.
@@ -56,4 +74,4 @@ vim.cmd 'filetype indent plugin on'
 -- Highlight text on yank.
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank { on_visual = false }'
 
-print('S General configuration sequence finished')
+utils.debug('S General configuration sequence finished')

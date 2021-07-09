@@ -1,5 +1,8 @@
 -- Lua Language Server configuration.
-print('S Lua LSP configuration sequence started')
+
+local utils = require 'utils'
+
+utils.debug('S Lua LSP configuration sequence started')
 
 local lsp = require'lspconfig'
 local common = require('lsp.common')
@@ -30,4 +33,4 @@ lsp.sumneko_lua.setup {
   }
 }
 
-print('S Lua LSP configuration sequence finished')
+utils.debug('S Lua LSP configuration sequence finished')

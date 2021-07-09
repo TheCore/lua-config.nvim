@@ -1,9 +1,17 @@
 -- Python Language Server configuration.
-print('S Python LSP configuration sequence started')
+
+local utils = require 'utils'
+
+utils.debug('S Python LSP configuration sequence started')
 
 local lsp = require'lspconfig'
 local common = require('lsp.common')
 
-lsp.pyls.setup { on_attach = common.custom_attach }
+local python_attach = function()
+  common.custom_attach()
+  utils.bufmap("n", "<Leader>is", "<cmd>%!isort -<CR>")
+end
 
-print('S Python LSP configuration sequence finished')
+lsp.pyls.setup { on_attach = python_attach }
+
+utils.debug('S Python LSP configuration sequence finished')

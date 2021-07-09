@@ -27,4 +27,11 @@ function utils.bufmap(mode, lhs, rhs)
   })
 end
 
+-- Print message if running in debug mode.
+function utils.debug(msg)
+  if vim.g.lua_debug == true then
+    print(msg)
+  end
+end
+
 return utils

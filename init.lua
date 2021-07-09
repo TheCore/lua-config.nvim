@@ -1,9 +1,11 @@
 -- Main NeoVim configuration.
-print('S Lua configuration sequence started')
+local utils = require 'utils'
+
+utils.debug('S Lua configuration sequence started')
 
 require('plugins')
 require('general')
 require('lsp')
 require('keymap')
 
-print('S Lua configuration sequence finished')
+utils.debug('S Lua configuration sequence finished')

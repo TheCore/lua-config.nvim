@@ -1,7 +1,8 @@
 -- nvim-compe auto-completion configuration
-print('S nvim-compe configuration sequence started')
 
 local utils = require('utils')
+
+utils.debug('S nvim-compe configuration sequence started')
 
 -- Enable auto-completion.
 utils.opt('o', 'completeopt', 'menuone,noselect')
@@ -50,22 +51,23 @@ end
 --- jump to prev/next snippet's placeholder
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
+    return t'<C-n>'
   --elseif vim.fn.call("vsnip#available", {1}) == 1 then
   --  return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
-    return t "<Tab>"
+    return t'<Tab>'
   else
     return vim.fn['compe#complete']()
   end
 end
+
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
+    return t'<C-p>'
   --elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
   --  return t "<Plug>(vsnip-jump-prev)"
   else
-    return t "<S-Tab>"
+    return t'<S-Tab>'
   end
 end
 
@@ -74,4 +76,20 @@ utils.map('s', '<Tab>', 'v:lua.tab_complete()', {expr = true})
 utils.map('i', '<S-Tab>', 'v:lua.s_tab_complete()', {expr = true})
 utils.map('s', '<S-Tab>', 'v:lua.s_tab_complete()', {expr = true})
 
-print('S nvim-compe configuration sequence finished')
+-- Handle pressing 'Enter' when completion popup is active.
+_G.enter_close_completion = function()
+  if vim.fn.pumvisible() == 1 then
+    return t(vim.api.nvim_call_function("compe#confirm", {
+      vim.api.nvim_call_function("lexima#expand", {'<LT>CR>', 'i'})
+    }))
+  else
+    return t'<CR>'
+  end
+end
+
+--utils.map('i', '<CR>', "compe#confirm('<CR>')", {silent = true, expr = true})
+vim.g.lexima_no_default_rules = 1
+vim.fn['lexima#set_default_rules']()
+utils.map('i', '<CR>', 'v:lua.enter_close_completion()', {expr = true})
+
+utils.debug('S nvim-compe configuration sequence finished')

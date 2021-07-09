@@ -1,7 +1,8 @@
 -- Arduino support configuration.
-print('S Arduino plugin configuration sequence started')
 
 local utils = require('utils')
+
+utils.debug('S Arduino plugin configuration sequence started')
 
 -- Configure shortcuts.
 utils.map('n', '<Leader>av', ':ArduinoVerify<CR>')
@@ -24,4 +25,4 @@ endfunction ]]
 -- Display Arduingo status bar.
 vim.cmd "au BufNewFile,BufRead *.ino let f:airline_section_x='%{ArduinoStatusLine()}'"
 
-print('S Arduino plugin configuration sequence finished')
+utils.debug('S Arduino plugin configuration sequence finished')
