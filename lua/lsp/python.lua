@@ -12,6 +12,6 @@ local python_attach = function()
   utils.bufmap("n", "<Leader>is", "<cmd>%!isort -<CR>")
 end
 
-lsp.pyls.setup { on_attach = python_attach }
+lsp.pylsp.setup { on_attach = python_attach }
 
 utils.debug('S Python LSP configuration sequence finished')
