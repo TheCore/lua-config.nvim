@@ -74,4 +74,8 @@ vim.cmd 'filetype indent plugin on'
 -- Highlight text on yank.
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank { on_visual = false }'
 
+-- Set fixed Python environment.
+vim.g.python_host_prog = '/usr/bin/python2'
+vim.g.python3_host_prog = '/usr/bin/python'
+
 utils.debug('S General configuration sequence finished')

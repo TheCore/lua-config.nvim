@@ -1,3 +1,30 @@
+# snippet: main-body
+# Create script's main body
+snippet main "Create main body" wm
+if __name__ == "__main__":
+    pass
+endsnippet
+
+
+# snippet: abstract-method
+# Create abstract method.
+snippet abmeth "Create abstract method" wm
+@abstractmethod
+def ${1:method_name}(${2:self}) -> ${3:return_value}:
+    pass
+endsnippet
+
+
+# snippet: abstract-property
+# Create abstract property.
+snippet abprop "Create abstract property" wm
+@property
+@abstractmethod
+def ${1:property_name}(${2:self}) -> ${3:return_value}:
+    pass
+endsnippet
+
+
 # snippet: argparse
 # Create argument parser function.
 snippet cliargs "Create CLI args parser" wm
@@ -31,6 +58,7 @@ class ${1:name}:
     def __init__(self):
         ${2:pass}
 endsnippet
+
 
 # snippet: fn-no-docs
 # Create simple function without docstrings.
